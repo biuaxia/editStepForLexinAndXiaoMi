@@ -28,7 +28,7 @@
     </parent>
     <groupId>cn.biuaxia.code.sport</groupId>
     <artifactId>lexin</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0-RELEASE</version>
     <name>lexin</name>
     <description>乐心健康刷步数</description>
 
