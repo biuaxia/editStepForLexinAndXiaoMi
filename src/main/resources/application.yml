@@ -1,0 +1,7 @@
+lexin:
+  login-url: https://sports.lifesense.com/sessions_service/login?version=4.5&systemType=2
+  step-url: https://sports.lifesense.com/sport_service/sport/sport/uploadMobileStepV2?version=4.5&systemType=2
+  default:
+    username: 17608348340
+    password: biuaxia666
+    step: 98765
