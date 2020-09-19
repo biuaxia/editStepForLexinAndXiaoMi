@@ -1,3 +1,8 @@
+# Project start port.
+server:
+  port: 80
+
+# Project custom properties.
 lexin:
   login-url: https://sports.lifesense.com/sessions_service/login?version=4.5&systemType=2
   step-url: https://sports.lifesense.com/sport_service/sport/sport/uploadMobileStepV2?version=4.5&systemType=2

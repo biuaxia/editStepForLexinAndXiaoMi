@@ -21,6 +21,7 @@ package cn.biuaxia.code.sport.lexin.utils;
 import cn.biuaxia.code.sport.lexin.config.ProjectConfig;
 import cn.biuaxia.code.sport.lexin.domain.bo.LoginBO;
 import cn.biuaxia.code.sport.lexin.domain.dto.LoginDTO;
+import cn.biuaxia.code.sport.lexin.exception.BusinessException;
 import cn.hutool.crypto.SecureUtil;
 import cn.hutool.http.Header;
 import cn.hutool.http.HttpRequest;
@@ -57,7 +58,9 @@ public class UserInfoUtils {
                 .loginName(username)
                 .password(password)
                 .build();
-        log.info("loginDTO: [{}]", JSONUtil.toJsonPrettyStr(loginDTO));
+        if (log.isDebugEnabled()) {
+            log.debug("loginDTO: [{}]", JSONUtil.toJsonPrettyStr(loginDTO));
+        }
 
         final String loginUrl = projectConfig.getLoginUrl();
         final String body = HttpRequest.post(loginUrl)
@@ -66,10 +69,12 @@ public class UserInfoUtils {
                 .timeout(20000)
                 .execute().body();
         final LoginBO loginBO = JSONUtil.toBean(body, LoginBO.class);
-        log.info("loginBO: [{}]", JSONUtil.toJsonPrettyStr(loginBO));
+        if (log.isDebugEnabled()) {
+            log.debug("loginBO: [{}]", JSONUtil.toJsonPrettyStr(loginBO));
+        }
         if (!Integer.valueOf(HttpStatus.OK.value()).equals(loginBO.getCode())) {
             log.warn("Try login to lexin, failed!");
-            return null;
+            throw new BusinessException(loginBO.getMsg());
         }
         return loginBO.getData();
     }

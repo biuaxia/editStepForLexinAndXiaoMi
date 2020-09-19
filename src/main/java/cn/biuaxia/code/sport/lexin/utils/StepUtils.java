@@ -71,7 +71,9 @@ public class StepUtils {
         final ArrayList<SubmitStepDTO> submitStepDTOS = new ArrayList<>();
         submitStepDTOS.add(submitStepDTO);
         map.put(LIST, submitStepDTOS);
-        log.info("map: [{}]", JSONUtil.toJsonPrettyStr(map));
+        if (log.isDebugEnabled()) {
+            log.debug("map: [{}]", JSONUtil.toJsonPrettyStr(map));
+        }
 
         final String stepUrl = projectConfig.getStepUrl();
         final String body = HttpRequest.post(stepUrl)
@@ -80,7 +82,9 @@ public class StepUtils {
                 .timeout(20000)
                 .execute().body();
         final SubmitStepBO submitStepBO = JSONUtil.toBean(body, SubmitStepBO.class);
-        log.info("submitStepBO: [{}]", JSONUtil.toJsonPrettyStr(submitStepBO));
+        if (log.isDebugEnabled()) {
+            log.debug("submitStepBO: [{}]", JSONUtil.toJsonPrettyStr(submitStepBO));
+        }
         if (!Integer.valueOf(HttpStatus.OK.value()).equals(submitStepBO.getCode())) {
             log.warn("Try submit step to lexin, failed!");
             return false;

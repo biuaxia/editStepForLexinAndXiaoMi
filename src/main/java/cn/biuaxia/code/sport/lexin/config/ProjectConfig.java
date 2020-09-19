@@ -23,6 +23,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 /**
+ * 项目配置
+ *
  * @author biuaxia
  * @date 2020-09-19 02:51:17
  */

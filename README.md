@@ -1,6 +1,6 @@
 # 乐心运动刷步数
 
-> 当前版本号(Current version): `1.0.1-RELEASE`
+> 当前版本号(Current version): `1.0.2-RELEASE`
 
 CodeRepository: <https://github.com/biuaxia/lexin>
 
@@ -9,6 +9,14 @@ Demo: <http://129.28.192.85:8080/step?u={U}&p={P}&s={S}>
 - `{U}`: 手机
 - `{P}`: 密码
 - `{S}`: 步数（需要刷的）
+
+## 更新日志
+
+仅从 `1.0.1-RELEASE` 开始记录，之前的版本更新请自行查看git commit。
+
+| 版本号 | 更新内容 |
+| ----- | ------ |
+| 1.0.2-RELEASE| 1. 新增异常处理（主要用于密码错误或手机不存在等提示） <br/> 2. 修改默认启动端口为80 <br/> 3. 修改 `README.md` 文档的**使用说明#启动** <br/> 4. 新增 `.gitignore` 文件 <br/> 5. 修改日志打印为 `debug` 等级 |
 
 ## Todo
 
