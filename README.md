@@ -53,10 +53,12 @@ OpenJDK 64-Bit Server VM (build 25.265-b01, mixed mode)
 从 [Releases](https://github.com/biuaxia/lexin/releases) 页面获取jar包，执行：
 
 ```bash
-nohup java -jar lexin-{VERSION}.jar &
+nohup java -jar lexin-{VERSION}.jar --server.port=8080 &
 ```
 
 直接启动即可，其中 `{VERSION}`为对应版本号，如 `1.0.0-RELEASE`。
+
+`--server.port=8080` 表示启动端口为8080，可以修改，如 `--server.port=80`。
 
 访问 `http://localhost:8080/step` ，接口请求参数如下：
 
