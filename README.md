@@ -12,7 +12,32 @@
 
 ## 如何使用
 
-无需修改直接启动即可。
+服务端需要具备：
+
+- JDK8+
+
+简单的安装可以直接执行：
+
+```shell
+yum install java-1.8.0-openjdk* -y
+java -version
+```
+
+执行完可以看到下面类似的内容即可。
+
+```bash
+openjdk version "1.8.0_265"
+OpenJDK Runtime Environment (build 1.8.0_265-b01)
+OpenJDK 64-Bit Server VM (build 25.265-b01, mixed mode)
+```
+
+从 [Releases](https://github.com/biuaxia/lexin/releases)页面获取jar包，执行：
+
+```bash
+nohup java -jar lexin-{VERSION}.jar &
+```
+
+直接启动即可，其中 `{VERSION}`为对应版本号，如 `1.0.0-RELEASE`。
 
 访问 `http://localhost:8080/step`，接口接收参数如下：
 
