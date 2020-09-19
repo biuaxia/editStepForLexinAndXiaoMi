@@ -1,5 +1,7 @@
 # 乐心运动刷步数
 
+> 当前版本号(Current version): `1.0.1-RELEASE`
+
 CodeRepository: <https://github.com/biuaxia/lexin>
 
 Demo: <http://129.28.192.85:8080/step?u={U}&p={P}&s={S}>
