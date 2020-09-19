@@ -1,6 +1,7 @@
 # 乐心运动刷步数
 
-[github](https://github.com/biuaxia/lexin)
+CodeRepository: <https://github.com/biuaxia/lexin>
+Demo: <http://129.28.192.85:8080/step>
 
 ## Todo
 
