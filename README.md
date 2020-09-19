@@ -2,7 +2,11 @@
 
 CodeRepository: <https://github.com/biuaxia/lexin>
 
-Demo: <http://129.28.192.85:8080/step>
+Demo: <http://129.28.192.85:8080/step?u={U}&p={P}&s={S}>
+
+- `{U}`: 手机
+- `{P}`: 密码
+- `{S}`: 步数（需要刷的）
 
 ## Todo
 
@@ -33,7 +37,7 @@ OpenJDK Runtime Environment (build 1.8.0_265-b01)
 OpenJDK 64-Bit Server VM (build 25.265-b01, mixed mode)
 ```
 
-从 [Releases](https://github.com/biuaxia/lexin/releases)页面获取jar包，执行：
+从 [Releases](https://github.com/biuaxia/lexin/releases) 页面获取jar包，执行：
 
 ```bash
 nohup java -jar lexin-{VERSION}.jar &
@@ -41,7 +45,7 @@ nohup java -jar lexin-{VERSION}.jar &
 
 直接启动即可，其中 `{VERSION}`为对应版本号，如 `1.0.0-RELEASE`。
 
-访问 `http://localhost:8080/step`，接口接收参数如下：
+访问 `http://localhost:8080/step` ，接口请求参数如下：
 
 | key | type | commits |
 | --- | ---- | ------- |
@@ -49,23 +53,4 @@ nohup java -jar lexin-{VERSION}.jar &
 | p | String | password, 乐心注册密码 |
 | s | String | step, 需要刷取的步数（不要超过98800） |
 
-如果您需要修改接口默认参数可以关注下面的文件，对其修改。
-
-1. `StepController.java`
-
-```jav
-    /**
-     * 请求接口默认的乐心手机
-     */
-    public static final String USERNAME = "17608348340";
-    /**
-     * 请求接口默认的乐心密码
-     */
-    public static final String PASSWORD = "biuaxia666";
-    /**
-     * 请求接口默认的刷取步数
-     */
-    public static final String STEP = "98765";
-```
-
-2. `application.yml` 为乐心接口配置，如果功能失效，请关注本项目的最新进度。
+**注意：**`application.yml` 为乐心接口配置，如果功能失效，请关注本项目的最新进度。

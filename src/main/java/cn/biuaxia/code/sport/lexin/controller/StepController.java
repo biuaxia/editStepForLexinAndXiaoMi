@@ -27,6 +27,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.constraints.NotBlank;
+
 /**
  * @author biuaxia
  * @date 2020-09-19 03:15:13
@@ -36,28 +38,27 @@ import org.springframework.web.bind.annotation.RestController;
 public class StepController {
 
     /**
-     * 请求接口默认的乐心手机
+     * 手机不允许为空
      */
-    public static final String USERNAME = "17608348340";
+    public static final String TIPS_USERNAME = "手机不允许为空";
 
     /**
-     * 请求接口默认的乐心密码
+     * 密码不允许为空
      */
-    public static final String PASSWORD = "biuaxia666";
+    public static final String TIPS_PASSWORD = "密码不允许为空";
 
     /**
-     * 请求接口默认的刷取步数
+     * 步数不允许为空
      */
-    public static final String STEP = "98765";
+    public static final String TIPS_STEP = "步数不允许为空";
 
     @Autowired
     private StepService stepService;
 
     @GetMapping
-    public ResponseEntity<IVO> step(@RequestParam(value = "u", defaultValue = USERNAME) String username,
-                                    @RequestParam(value = "p", defaultValue = PASSWORD) String password,
-                                    @RequestParam(value = "s", defaultValue = STEP) String step) {
-
+    public ResponseEntity<IVO> step(@NotBlank(message = TIPS_USERNAME) @RequestParam(value = "u") String username,
+                                    @NotBlank(message = TIPS_PASSWORD) @RequestParam(value = "p") String password,
+                                    @NotBlank(message = TIPS_STEP) @RequestParam(value = "s") String step) {
         return ResponseEntity.ok()
                 .body(stepService.submitStep(username, password, Integer.parseInt(step)));
     }
