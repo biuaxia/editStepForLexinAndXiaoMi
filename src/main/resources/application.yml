@@ -22,7 +22,7 @@ spring:
       path: /console
       settings:
         trace: false
-        web-allow-others: false
+        web-allow-others: true
 
 ## 日志配置
 logging:
