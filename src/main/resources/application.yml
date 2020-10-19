@@ -15,7 +15,7 @@ spring:
     #    data: classpath:db/data-h2.sql
     url: jdbc:h2:./data/db
     username: sa
-    password: biuaxia666
+    password: 123456
   h2:
     console:
       enabled: true
