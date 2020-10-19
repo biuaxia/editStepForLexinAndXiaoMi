@@ -21,11 +21,17 @@ package cn.biuaxia.code.sport.lexin.service;
 import cn.biuaxia.code.sport.lexin.domain.bo.LoginBO;
 import cn.biuaxia.code.sport.lexin.domain.vo.IVO;
 import cn.biuaxia.code.sport.lexin.domain.vo.SubmitVO;
+import cn.biuaxia.code.sport.lexin.entity.TimedTask;
+import cn.biuaxia.code.sport.lexin.mapper.TimedTaskMapper;
 import cn.biuaxia.code.sport.lexin.utils.StepUtils;
 import cn.biuaxia.code.sport.lexin.utils.UserInfoUtils;
-import org.springframework.beans.factory.annotation.Autowired;
+import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.crypto.SecureUtil;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 
 /**
  * 步数接口实现类
@@ -39,14 +45,18 @@ public class StepServiceImpl implements StepService {
     public static final String SUBMIT = "提交";
     public static final String SUCCESS = "成功";
     public static final String FAILURE = "失败";
-    @Autowired
+
+    @Resource
     private UserInfoUtils userInfoUtils;
 
-    @Autowired
+    @Resource
     private StepUtils stepUtils;
 
+    @Resource
+    private TimedTaskMapper timedTaskMapper;
+
     @Override
-    public IVO submitStep(String username, String password, int step) {
+    public IVO submitStep(String username, String password, Integer step) {
         final LoginBO.DataDTO userInfo = userInfoUtils.getUserInfo(username, password);
         final String userId = userInfo.getUserId();
         final Boolean submitResult = stepUtils.submit(userId, step);
@@ -57,11 +67,30 @@ public class StepServiceImpl implements StepService {
                     .build();
         }
         final SubmitVO submitVO = SubmitVO.builder().build();
-        submitVO.setData(SubmitVO.Data.builder()
-                .userId(userId)
-                .username(username)
-                .step(step)
-                .build());
+        submitVO.setData(
+                SubmitVO.Data.builder()
+                        .userId(userId)
+                        .username(username)
+                        .step(step)
+                        .build());
+
+        password = SecureUtil.md5(password);
+
+        TimedTask dbTimedTask = timedTaskMapper.selectOne(new LambdaQueryWrapper<TimedTask>()
+                .eq(TimedTask::getUsername, username)
+                .eq(TimedTask::getPassword, password));
+        if (ObjectUtil.isEmpty(dbTimedTask)) {
+            timedTaskMapper.insert(TimedTask.builder()
+                    .username(username)
+                    .password(password)
+                    .step(step)
+                    .build());
+        } else {
+            if (ObjectUtil.isNotEmpty(dbTimedTask.getStep()) && !step.equals(dbTimedTask.getStep())) {
+                dbTimedTask.setStep(step);
+                timedTaskMapper.updateById(dbTimedTask);
+            }
+        }
         return submitVO;
     }
 

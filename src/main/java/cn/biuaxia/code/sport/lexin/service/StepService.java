@@ -36,6 +36,6 @@ public interface StepService {
      * @param step     步数
      * @return {@link IVO}
      */
-    IVO submitStep(String username, String password, int step);
+    IVO submitStep(String username, String password, Integer step);
 
 }

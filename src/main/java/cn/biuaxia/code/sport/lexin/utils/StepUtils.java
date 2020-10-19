@@ -26,11 +26,11 @@ import cn.hutool.http.Header;
 import cn.hutool.http.HttpRequest;
 import cn.hutool.json.JSONUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -47,7 +47,7 @@ public class StepUtils {
 
     public static final String LIST = "list";
 
-    @Autowired
+    @Resource
     private ProjectConfig projectConfig;
 
     /**
@@ -58,6 +58,25 @@ public class StepUtils {
      * @return 是否提交成功
      */
     public Boolean submit(String userId, int step) {
+        final SubmitStepBO submitStepBO = getSubmitStepBO(userId, step);
+        if (log.isDebugEnabled()) {
+            log.debug("submitStepBO: [{}]", JSONUtil.toJsonPrettyStr(submitStepBO));
+        }
+        if (!Integer.valueOf(HttpStatus.OK.value()).equals(submitStepBO.getCode())) {
+            log.warn("Try submit step to lexin, failed!");
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * 获取提交步数
+     *
+     * @param userId 用户ID
+     * @param step   步数
+     * @return 响应结果
+     */
+    public SubmitStepBO getSubmitStepBO(String userId, int step) {
         int calories = step / 4;
         int distance = step / 3;
         final SubmitStepDTO submitStepDTO = SubmitStepDTO.builder()
@@ -82,14 +101,7 @@ public class StepUtils {
                 .timeout(20000)
                 .execute().body();
         final SubmitStepBO submitStepBO = JSONUtil.toBean(body, SubmitStepBO.class);
-        if (log.isDebugEnabled()) {
-            log.debug("submitStepBO: [{}]", JSONUtil.toJsonPrettyStr(submitStepBO));
-        }
-        if (!Integer.valueOf(HttpStatus.OK.value()).equals(submitStepBO.getCode())) {
-            log.warn("Try submit step to lexin, failed!");
-            return false;
-        }
-        return true;
+        return submitStepBO;
     }
 
 }

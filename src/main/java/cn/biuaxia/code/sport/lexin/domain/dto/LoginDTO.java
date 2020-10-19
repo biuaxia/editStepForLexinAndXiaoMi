@@ -31,15 +31,6 @@ import lombok.Data;
 @Data
 public class LoginDTO {
 
-
-    /**
-     * loginName : 17608348340
-     * password : b69f0c9743c84b1e04fbefd2129abedc
-     * clientId : 8e844e28db7245eb81823132464835eb
-     * appType : 6
-     * roleType : 0
-     */
-
     private String loginName;
     private String password;
 

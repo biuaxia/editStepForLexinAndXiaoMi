@@ -6,7 +6,31 @@ server:
 lexin:
   login-url: https://sports.lifesense.com/sessions_service/login?version=4.5&systemType=2
   step-url: https://sports.lifesense.com/sport_service/sport/sport/uploadMobileStepV2?version=4.5&systemType=2
-  default:
-    username: 17608348340
-    password: biuaxia666
-    step: 98765
+
+# Datasource properties.
+spring:
+  datasource:
+    driver-class-name: org.h2.Driver
+    schema: classpath:db/schema-h2.sql
+    #    data: classpath:db/data-h2.sql
+    url: jdbc:h2:./data/db
+    username: sa
+    password: 123456
+  h2:
+    console:
+      enabled: true
+      path: /console
+      settings:
+        trace: false
+        web-allow-others: false
+
+## 日志配置
+logging:
+  level:
+    ### 解决控制台输出 Unconditional classes
+    org.springframework.boot.autoconfigure: warn
+
+# SQL日志
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

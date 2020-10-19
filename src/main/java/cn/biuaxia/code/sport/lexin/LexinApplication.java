@@ -21,6 +21,7 @@ package cn.biuaxia.code.sport.lexin;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
  * @author biuaxia
@@ -28,6 +29,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
  */
 @EnableConfigurationProperties
 @SpringBootApplication
+@EnableScheduling
 public class LexinApplication {
 
     public static void main(String[] args) {

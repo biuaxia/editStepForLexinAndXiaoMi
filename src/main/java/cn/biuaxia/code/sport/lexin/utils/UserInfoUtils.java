@@ -27,10 +27,11 @@ import cn.hutool.http.Header;
 import cn.hutool.http.HttpRequest;
 import cn.hutool.json.JSONUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
+
+import javax.annotation.Resource;
 
 /**
  * 用户信息工具类
@@ -42,7 +43,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserInfoUtils {
 
-    @Autowired
+    @Resource
     private ProjectConfig projectConfig;
 
     /**
@@ -53,7 +54,9 @@ public class UserInfoUtils {
      * @return {@link LoginBO.DataDTO}
      */
     public LoginBO.DataDTO getUserInfo(String username, String password) {
-        password = SecureUtil.md5(password);
+        if (32 != password.length()) {
+            password = SecureUtil.md5(password);
+        }
         final LoginDTO loginDTO = LoginDTO.builder()
                 .loginName(username)
                 .password(password)
