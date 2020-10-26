@@ -27,6 +27,7 @@ import cn.biuaxia.code.sport.lexin.mapper.TimedTaskMapper;
 import cn.biuaxia.code.sport.lexin.mapper.TimedTaskSuccessLogMapper;
 import cn.biuaxia.code.sport.lexin.service.StepService;
 import cn.hutool.core.map.MapUtil;
+import cn.hutool.core.util.PhoneUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,6 +39,7 @@ import javax.annotation.Resource;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * @author biuaxia
@@ -93,6 +95,14 @@ public class StepController {
         Page<TimedTaskErrorLog> errorLogPage =
                 timedTaskErrorLogMapper.selectPage(new Page<>(page, size), null);
         HashMap<String, Page<?>> map = new HashMap<>(MapUtil.DEFAULT_INITIAL_CAPACITY);
+
+        // 数据脱敏处理
+        List<TimedTask> records = timedTaskPage.getRecords();
+        records.forEach(item -> {
+            item.setUsername(PhoneUtil.hideBetween(item.getUsername()).toString());
+        });
+        timedTaskPage.setRecords(records);
+
         map.put("task", timedTaskPage);
         map.put("success", successLogPage);
         map.put("error", errorLogPage);
