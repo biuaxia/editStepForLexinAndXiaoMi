@@ -3,9 +3,19 @@ server:
   port: 80
 
 # Project custom properties.
-lexin:
-  login-url: https://sports.lifesense.com/sessions_service/login?version=4.5&systemType=2
-  step-url: https://sports.lifesense.com/sport_service/sport/sport/uploadMobileStepV2?version=4.5&systemType=2
+project:
+  # 乐心运动
+  lexin:
+    login-url: https://sports.lifesense.com/sessions_service/login?version=4.5&systemType=2
+    step-url: https://sports.lifesense.com/sport_service/sport/sport/uploadMobileStepV2?version=4.5&systemType=2
+
+  # 小米运动
+  xiaomi:
+    access-code-url: https://api-user.huami.com/registrations/+86%s/tokens?%s
+    access-code-redirect-url: https://s3-us-west-2.amazonaws.com/hm-registration/successsignin.html
+    login-url: https://account.huami.com/v2/client/login?%s
+    app-token-url: https://account-cn.huami.com/v1/client/app_tokens?app_name=com.xiaomi.hm.health&dn=api-user.huami.com,api-mifit.huami.com,app-analytics.huami.com&login_token=%s&os_version=4.1.0
+    update-step-url: https://api-mifit-cn.huami.com/v1/data/band_data.json?&t=%s
 
 # Datasource properties.
 spring:
@@ -29,6 +39,7 @@ logging:
   level:
     ### 解决控制台输出 Unconditional classes
     org.springframework.boot.autoconfigure: warn
+    cn.biuaxia.code.sport: debug
 
 # SQL日志
 mybatis-plus:

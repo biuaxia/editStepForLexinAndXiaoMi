@@ -1,14 +1,39 @@
 {
   "properties": [
     {
-      "name": "lexin.login-url",
+      "name": "project.lexin.login-url",
       "type": "java.lang.String",
-      "description": "\u767B\u5F55\u5730\u5740"
+      "description": "登录地址."
     },
     {
-      "name": "lexin.step-url",
+      "name": "project.lexin.step-url",
       "type": "java.lang.String",
-      "description": "\u63D0\u4EA4\u6B65\u6570\u5730\u5740"
+      "description": "提交步数地址."
+    },
+    {
+      "name": "project.xiaomi.access-code-url",
+      "type": "java.lang.String",
+      "description": "获取AccessCode地址."
+    },
+    {
+      "name": "project.xiaomi.access-code-redirect-url",
+      "type": "java.lang.String",
+      "description": "获取AccessCode后重定向地址."
+    },
+    {
+      "name": "project.xiaomi.login-url",
+      "type": "java.lang.String",
+      "description": "登录地址."
+    },
+    {
+      "name": "project.xiaomi.app-token-url",
+      "type": "java.lang.String",
+      "description": "获取AppToken地址."
+    },
+    {
+      "name": "project.xiaomi.update-step-url",
+      "type": "java.lang.String",
+      "description": "更新步数地址."
     }
   ]
 }
