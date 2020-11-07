@@ -6,12 +6,12 @@
 
 > **提示：** 2020年10月29日乐心刷步可以，但数据无法同步至阿里健康与腾讯体育，初步怀疑是乐心屏蔽了数据超过 20000 的同学。且行且珍惜
 
+> 不提供Demo演示！望知悉！
+
 CodeRepository: 
 
 - <https://github.com/biuaxia/lexin>
 - <https://gitee.com/biuaxia/lexin.git>
-
-Demo: <http://129.28.192.85:8080/step?u={U}&p={P}&s={S}>
 
 - `{U}`: 手机
 - `{P}`: 密码
